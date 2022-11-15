@@ -11,9 +11,11 @@ func ExampleNewBuilder_Logger_WithoutCorrlationId() {
 					WithLogFlags(0). // removes log flags to assert output
 					Build()          // builds the logger
 
-	loggr.Debug(messages.New().WithCorrelationId("2323424").WithMessage("this is a log").Build())
+	loggr.Debug(messages.New("").WithCorrelationId("2323424").WithMessage("this is a log").Message()) // defining message with `WithMessage`
+	loggr.Debug(messages.New("this is a log").WithCorrelationId("2323424").Message())
 
 	// Output:
+	// [DEBUG]{"correlation_id":"2323424","message":"this is a log"}
 	// [DEBUG]{"correlation_id":"2323424","message":"this is a log"}
 }
 
@@ -23,7 +25,7 @@ func ExampleNewBuilder_Logger_WithCorrelationId() {
 					WithCorrelationId("2323424"). // setting correlation id so we expect the same result as Example above
 					Build()                       // builds the logger.
 
-	loggr.Debug(messages.New().WithMessage("this is a log").Build())
+	loggr.Debug(messages.New("").WithMessage("this is a log").Message())
 
 	// Output:
 	// [DEBUG]{"correlation_id":"2323424","message":"this is a log"}

@@ -16,10 +16,14 @@ type LogMessageBuilder struct {
 
 // New
 //
-// Returns a new LogMessageBuilder
-func New() *LogMessageBuilder {
+// # Returns a new LogMessageBuilder
+//
+// @param logMessage can be changed later using `WithMessage` method.
+func New(logMessage string) *LogMessageBuilder {
 	return &LogMessageBuilder{
-		companyLog: &LogMessage{},
+		companyLog: &LogMessage{
+			Message: logMessage,
+		},
 	}
 }
 
@@ -36,6 +40,6 @@ func (clb *LogMessageBuilder) WithMessage(message string) *LogMessageBuilder {
 // Build
 //
 // Builds LogMessage required by company logger.
-func (clb *LogMessageBuilder) Build() *LogMessage {
+func (clb *LogMessageBuilder) Message() *LogMessage {
 	return clb.companyLog
 }
