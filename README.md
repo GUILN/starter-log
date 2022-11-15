@@ -19,7 +19,7 @@ To do so, [commit-msg hook](./.githooks/commit-msg) will enforce this convention
 - Make sure your last commit message describes and indicates the expected semantics for the version to be generated.
 - Run `make new_version`
 
-### If it is the first time you are pushing to this repo
+### **!NOTE: If it is the first time you are pushing to this repo**.
 You need to create the first version:
 - Run `git tag -a v0.0.1 -m "first version"`
 - Run `git push origin --tags v0.0.1`
