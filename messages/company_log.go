@@ -3,8 +3,9 @@ package messages
 // LogMessage
 // provides basic structure for company log message.
 type LogMessage struct {
-	CorrelationId string `json:"correlation_id"`
-	Message       string `json:"message,omitempty"`
+	CorrelationId string            `json:"correlation_id"`
+	Message       string            `json:"message,omitempty"`
+	Tags          map[string]string `json:"tags,omitempty"`
 }
 
 // LogMessageBuilder
@@ -23,6 +24,7 @@ func New(logMessage string) *LogMessageBuilder {
 	return &LogMessageBuilder{
 		companyLog: &LogMessage{
 			Message: logMessage,
+			Tags:    make(map[string]string),
 		},
 	}
 }
@@ -34,6 +36,11 @@ func (clb *LogMessageBuilder) WithCorrelationId(correlationId string) *LogMessag
 
 func (clb *LogMessageBuilder) WithMessage(message string) *LogMessageBuilder {
 	clb.companyLog.Message = message
+	return clb
+}
+
+func (clb *LogMessageBuilder) WithTag(key, value string) *LogMessageBuilder {
+	clb.companyLog.Tags[key] = value
 	return clb
 }
 

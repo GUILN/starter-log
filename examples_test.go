@@ -30,3 +30,15 @@ func ExampleNewBuilder_Logger_WithCorrelationId() {
 	// Output:
 	// [DEBUG]{"correlation_id":"2323424","message":"this is a log"}
 }
+
+func ExampleLogMessage_With_Tags() {
+	loggr := logger.NewBuilder(). // creates a new builder with defaults
+					WithLogFlags(0).              // removes log flags to assert output
+					WithCorrelationId("2323424"). // setting correlation id
+					Build()                       // builds the logger.
+
+	loggr.Debug(messages.New("this is a log").WithTag("key", "val").Message())
+
+	// Output:
+	// [DEBUG]{"correlation_id":"2323424","message":"this is a log","tags":{"key":"val"}}
+}
