@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 RUN_VERSIONING=0
 
-echo "pre push..."
+echo "running pre push hook..."
 
 
 # Get current dir
