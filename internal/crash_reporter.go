@@ -50,7 +50,7 @@ func (scr *SentryCrashReporter) InitCrashReporter() (func() bool, error) {
 	}
 
 	if err := sentry.Init(sentry.ClientOptions{
-		Dsn:              scr.config.Dsn,
+		Dsn:              config.Dsn,
 		TracesSampleRate: config.TraceSampleRate,
 	}); err != nil {
 		return nil, err
