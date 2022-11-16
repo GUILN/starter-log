@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"encoding/json"
 	"io"
 	"log"
 
@@ -76,8 +75,7 @@ func (l *Logger) Error(v *messages.LogMessage) {
 
 func commitLog(logger *log.Logger, m *messages.LogMessage, defaultCorrelationId string) {
 	resolveDefaultValues(defaultCorrelationId, m)
-	b, _ := json.Marshal(m)
-	logger.Println(string(b))
+	logger.Println(m.AsJson())
 }
 
 // resolveDefaultValues.

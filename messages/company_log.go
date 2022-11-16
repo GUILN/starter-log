@@ -1,5 +1,7 @@
 package messages
 
+import "encoding/json"
+
 // LogMessage
 // provides basic structure for company log message.
 type LogMessage struct {
@@ -7,6 +9,11 @@ type LogMessage struct {
 	Message       string            `json:"message,omitempty"`
 	Tags          map[string]string `json:"tags,omitempty"`
 	Err           string            `json:"error,omitempty"`
+}
+
+func (lm *LogMessage) AsJson() string {
+	b, _ := json.Marshal(lm)
+	return string(b)
 }
 
 // LogMessageBuilder
@@ -55,4 +62,8 @@ func (clb *LogMessageBuilder) WithError(err error) *LogMessageBuilder {
 // Builds LogMessage required by company logger.
 func (clb *LogMessageBuilder) Message() *LogMessage {
 	return clb.companyLog
+}
+
+func (clb *LogMessageBuilder) JsonMessage() string {
+	return clb.Message().AsJson()
 }
