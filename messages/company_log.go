@@ -6,6 +6,7 @@ type LogMessage struct {
 	CorrelationId string            `json:"correlation_id"`
 	Message       string            `json:"message,omitempty"`
 	Tags          map[string]string `json:"tags,omitempty"`
+	Err           string            `json:"error,omitempty"`
 }
 
 // LogMessageBuilder
@@ -41,6 +42,11 @@ func (clb *LogMessageBuilder) WithMessage(message string) *LogMessageBuilder {
 
 func (clb *LogMessageBuilder) WithTag(key, value string) *LogMessageBuilder {
 	clb.companyLog.Tags[key] = value
+	return clb
+}
+
+func (clb *LogMessageBuilder) WithError(err error) *LogMessageBuilder {
+	clb.companyLog.Err = err.Error()
 	return clb
 }
 
