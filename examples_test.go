@@ -45,6 +45,18 @@ func ExampleLogMessage_With_Tags() {
 	// [DEBUG]{"correlation_id":"2323424","message":"this is a log","tags":{"key":"val"}}
 }
 
+func ExampleLogMessage_WithShortAlias() {
+	loggr := logger.NewBuilder(). // creates a new builder with defaults
+					WithLogFlags(0).              // removes log flags to assert output
+					WithCorrelationId("2323424"). // setting correlation id
+					Build()                       // builds the logger.
+
+	loggr.Warn(&messages.M{Message: "this is a log"})
+
+	// Output:
+	// [WARN]{"correlation_id":"2323424","message":"this is a log"}
+}
+
 func ExampleLogError() {
 	loggr := logger.NewBuilder(). // creates a new builder with defaults
 					WithLogFlags(0).              // removes log flags to assert output
